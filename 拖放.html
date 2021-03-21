@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title>
+<style>
+#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+#div2 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script>
+function allowDrop(ev)
+{
+    ev.preventDefault();
+}
+ 
+function drag(ev)
+{
+    // console.log(ev);     
+    ev.dataTransfer.setData("Text",ev.target.id);
+}
+ 
+function drop(ev)
+{
+    // console.log(ev);
+    ev.preventDefault();
+    console.log(ev.dataTransfer.getData("Text"));
+    var data=ev.dataTransfer.getData("Text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+ 
+<p>两个矩形框来回互托:</p>
+ 
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <img loading="lazy" id="drag1" src="2.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+</div>
+<br>
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+ 
+</body>
+</html>
+</body>
+</html>
+
+

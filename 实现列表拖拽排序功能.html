@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./jquery3.4.1.js"></script>
+</head>
+
+<style>
+  ul {
+    list-style: none;
+    width: 200px;
+    height: 400px;
+
+  }
+  ul>li {
+    width: 100%;
+    height:40px;
+    border: 1px solid #008c8c;
+    color: pink;
+    font-size: 15x;
+    line-height: 40px;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <ul>
+    <li>好好学习</li>
+    <li>天天向上</li>
+    <li>素颜</li>
+    <li>永不失联的爱</li>
+    <li>冬眠</li>
+    <li>a</li>
+    <li>d</li>
+    <li>g</li>
+    <li>h</li>
+    <li>j</li>
+  </ul>
+</body>
+<script>
+  $(function () { 
+    var lis = document.querySelectorAll('li');
+    var ul = document.getElementsByTagName("ul")[0];
+    for(var i = 0; i < lis.length; i++) {
+        
+      //这里需要将lis[i]转换为jQuery的选择器，因为lis[i]是变量，所以不能用引号引起来
+      $(lis[i]).prop("draggable", "true");
+      
+      //将遍历的每一个元素都绑定一个id选择器
+      lis[i].id = 'mydiv' + i;
+      
+      lis[i].ondragstart = function (e) { 
+        e.dataTransfer.setData('id', this.id)
+       };
+
+      lis[i].ondragover = function (e) { 
+        e.preventDefault();
+        this.style.backgroundColor = "red";
+       };
+      
+      lis[i].ondrop = function (e) { 
+        console.log(this);
+        console.log(e.dataTransfer.getData("id"));
+        var id = e.dataTransfer.getData("id");
+        var tuo_li = document.getElementById(id);
+        ul.insertBefore(tuo_li,this);
+
+        this.style.backgroundColor = "inherit"; 
+       } 
+      
+      lis[i].ondragleave = function () { 
+        this.style.backgroundColor = "inherit"; 
+      };
+  }
+   });
+</script>
+</html>
